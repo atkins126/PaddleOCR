@@ -11,6 +11,8 @@ Paddle Lite是飞桨轻量化推理引擎，为手机、IOT端提供高效推理
 - 电脑（编译Paddle Lite）
 - 安卓手机（armv7或armv8）
 
+***注意： PaddleOCR 移动端部署当前不支持动态图模型，只支持静态图保存的模型。当前PaddleOCR静态图的分支是`develop`。***
+
 ### 1.1 准备交叉编译环境
 交叉编译环境用于编译 Paddle Lite 和 PaddleOCR 的C++ demo。
 支持多种开发环境，不同开发环境的编译流程请参考对应文档。
@@ -34,8 +36,8 @@ Paddle Lite是飞桨轻量化推理引擎，为手机、IOT端提供高效推理
 ```
 git clone https://github.com/PaddlePaddle/Paddle-Lite.git
 cd Paddle-Lite
-# 切换到Paddle-Lite develop稳定分支
-git checkout develop
+# 切换到Paddle-Lite release/v2.7 稳定分支
+git checkout release/v2.7
 ./lite/tools/build_android.sh  --arch=armv8  --with_cv=ON --with_extra=ON
 ```
 
@@ -84,9 +86,9 @@ Paddle-Lite 提供了多种策略来自动优化原始的模型，其中包括�
 
 |模型版本|模型简介|模型大小|检测模型|文本方向分类模型|识别模型|Paddle-Lite版本|
 |-|-|-|-|-|-|-|
-|V1.1|超轻量中文OCR 移动端模型|8.1M|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_det_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_cls_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_rec_opt.nb)|develop|
-|【slim】V1.1|超轻量中文OCR 移动端模型|3.5M|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_det_prune_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_cls_quant_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_rec_quant_opt.nb)|develop|
-|V1.0|轻量级中文OCR 移动端模型|8.6M|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.0_det_opt.nb)|---|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.0_rec_opt.nb)|develop|
+|V1.1|超轻量中文OCR 移动端模型|8.1M|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_det_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_cls_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_rec_opt.nb)|v2.7|
+|【slim】V1.1|超轻量中文OCR 移动端模型|3.5M|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_det_prune_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_cls_quant_opt.nb)|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.1_rec_quant_opt.nb)|v2.7|
+|V1.0|轻量级中文OCR 移动端模型|8.6M|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.0_det_opt.nb)|---|[下载地址](https://paddleocr.bj.bcebos.com/20-09-22/mobile/lite/ch_ppocr_mobile_v1.0_rec_opt.nb)|v2.7|
 
 注意：V1.1 3.0M 轻量模型是使用PaddleSlim优化后的，需要配合Paddle-Lite最新预测库使用。
 
@@ -99,9 +101,7 @@ Paddle-Lite 提供了多种策略来自动优化原始的模型，其中包括�
 # 如果准备环境时已经clone了Paddle-Lite，则不用重新clone Paddle-Lite
 git clone https://github.com/PaddlePaddle/Paddle-Lite.git
 cd Paddle-Lite
-git checkout develop
-# 切换到固定的commit
-git reset --hard 55c53482bcdd2868373d024dd1144e4c5ec0e6b8
+git checkout release/v2.7
 # 启动编译
 ./lite/tools/build.sh build_optimize_tool
 ```
